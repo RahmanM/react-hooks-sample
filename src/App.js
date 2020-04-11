@@ -1,11 +1,15 @@
 import "./styles.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "./index";
 
 export default function App() {
   // userState enables to use state inside functional component
   [todo, setTodo] = useState({});
   [id, setId] = useState(1);
+
+  // context hooks that uses the value that is initialised in the other component
+  const User = useContext(UserContext);
 
   // This is equivalent of componentDidMount, componentUpdated, and componentWillUnmount
   // UseEffect is called everytime render happens, so its equivalent of componentDidMount
@@ -26,6 +30,11 @@ export default function App() {
 
   return (
     <div>
+      <div>
+        User: {User.name} - {User.email}
+      </div>
+      <hr />
+      <br />
       Todo Id:{" "}
       <input type="textbox" value={id} onChange={e => setId(e.target.value)} />
       <hr />
